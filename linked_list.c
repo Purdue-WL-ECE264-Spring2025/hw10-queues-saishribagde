@@ -44,7 +44,7 @@ void insert_at_tail(struct linked_list *list, size_t value)
     return;
   }
   
-  struct list_node *current = new_node(value);
+  struct list_node *current = list->head;
   while(current->next != NULL)
   {
     current = current->next;
@@ -88,7 +88,7 @@ size_t remove_from_tail(struct linked_list *list)
 
   if(previous_node)
   {
-    previous_node->next == NULL;
+    previous_node->next = NULL;
   }
   else
   {

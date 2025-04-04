@@ -11,6 +11,7 @@ struct game_state dequeue(struct queue *q)
 { 
     uint64_t serialized_state = remove_from_head(&(q->data));
     struct game_state dequeued_state = deserialize(serialized_state); 
+    return dequeued_state;
 }
 
 int number_of_moves(struct game_state start) 
@@ -31,7 +32,7 @@ int number_of_moves(struct game_state start)
         int expected = 1;
         if(current.tiles[3][3] == 0)
         {
-            int solved = 1;
+            solved = 1;
             for(int i = 0; i < 4; i++)
             {
                 for(int j = 0; j < 4; j++)
@@ -60,7 +61,6 @@ int number_of_moves(struct game_state start)
         }
 
         struct game_state next = current;
-        int seen;
         
         //move up
         next = current;

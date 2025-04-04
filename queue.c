@@ -18,10 +18,10 @@ struct game_state dequeue(struct queue *q)
 int number_of_moves(struct game_state start) 
 { 
     struct queue q;
-    struct linked_list visited_state = {0};
+    //struct linked_list visited_state = {0};
 
     enqueue(&q, start);
-    insert_at_head(&visited_state, serialize(start));
+    //insert_at_head(&visited_state, serialize(start));
 
     while(q.data.head != NULL)
     {
@@ -55,7 +55,7 @@ int number_of_moves(struct game_state start)
 
         if(solved==1)
         {
-            free_list(visited_state);
+            //free_list(visited_state);
             free_list(q.data);
             return current.num_steps;
         }
@@ -67,10 +67,11 @@ int number_of_moves(struct game_state start)
         if ((next.empty_row!=3))
         {
             move_up(&next);
-            if(in_visited(visited_state, next) == 0)
+
+            if(in_visited(q.data, next) == 0)
             {
                 enqueue(&q, next);
-                insert_at_head(&visited_state, serialize(next));
+                //insert_at_head(&visited_state, serialize(next));
             }
             
         }
@@ -79,10 +80,10 @@ int number_of_moves(struct game_state start)
         if(next.empty_row != 0)
         {
             move_down(&next);
-            if(in_visited(visited_state, next) == 0)
+            if(in_visited(q.data, next) == 0)
             {
                 enqueue(&q, next);
-                insert_at_head(&visited_state, serialize(next));
+                //insert_at_head(&visited_state, serialize(next));
             }
         }
 
@@ -90,10 +91,10 @@ int number_of_moves(struct game_state start)
         if(next.empty_col != 0)
         {
             move_right(&next);
-            if(in_visited(visited_state, next) == 0)
+            if(in_visited(q.data, next) == 0)
             {
                 enqueue(&q, next);
-                insert_at_head(&visited_state, serialize(next));
+                //insert_at_head(&visited_state, serialize(next));
             }
         }
         
@@ -101,111 +102,16 @@ int number_of_moves(struct game_state start)
         if(next.empty_col != 3)
         {
             move_left(&next);
-            if(in_visited(visited_state, next) == 0)
+            if(in_visited(q.data, next) == 0)
             {
                 enqueue(&q, next);
-                insert_at_head(&visited_state, serialize(next));
+                //insert_at_head(&visited_state, serialize(next));
             };
         }
-        
-
-        // if(next.num_steps != current.num_steps)
-        // {
-        //     int seen = 0;
-        //     struct list_node *cursor = visited_state.head;
-        //     if(invisited(cursor, next) == 0)
-        //     {
-        //         enqueue(&q, next);
-        //         insert_at_head(&visited_state, serialize(next));
-        //     }
-        //     // while(cursor != NULL)
-        //     // {
-        //     //     if(cursor->value == serialize(next))
-        //     //     {
-        //     //         seen = 1;
-        //     //         break;
-        //     //     }
-        //     // }
-        // }
-
-        //move down
-        // next = current;
-        // move_down(&next);
-
-        // if(next.num_steps != current.num_steps)
-        // {
-        //     int seen = 0;
-        //     struct list_node *cursor = visited_state.head;
-        //     while(cursor != NULL)
-        //     {
-        //         if(cursor-> value == serialize(next))
-        //         {
-        //             seen = 1;
-        //             break;
-        //         }
-        //     }
-
-        //     if(seen == 0)
-        //     {
-        //         enqueue(&q, next);
-        //         insert_at_head(&visited_state, serialize(next));
-        //     }
-  
-        // }
-
-        // //move right
-        // next = current;
-        // move_right(&next);
-
-        // if(next.num_steps != current.num_steps)
-        // {
-        //     int seen = 0;
-        //     struct list_node *cursor = visited_state.head;
-        //     while(cursor != NULL)
-        //     {
-        //         if(cursor-> value == serialize(next))
-        //         {
-        //             seen = 1;
-        //             break;
-        //         }
-        //     }
-
-        //     if(seen == 0)
-        //     {
-        //         enqueue(&q, next);
-        //         insert_at_head(&visited_state, serialize(next));
-        //     }
-  
-        // }
-
-        // // move left
-        // next = current;
-        // move_left(&next);
-
-        // if(next.num_steps != current.num_steps)
-        // {
-        //     int seen = 0;
-        //     struct list_node *cursor = visited_state.head;
-        //     while(cursor != NULL)
-        //     {
-        //         if(cursor-> value == serialize(next))
-        //         {
-        //             seen = 1;
-        //             break;
-        //         }
-        //     }
-
-        //     if(seen == 0)
-        //     {
-        //         enqueue(&q, next);
-        //         insert_at_head(&visited_state, serialize(next));
-        //     }
-  
-        //}
     }
 
     free_list(q.data);
-    free_list(visited_state);
+    //free_list(visited_state);
     return -1;
 
 }
